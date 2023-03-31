@@ -9,7 +9,9 @@ router.get("/", (req, res) => {
         SELECT * FROM collection WHERE user_id=9 ;`
         dbConn.query(sql, (err, result) => {
             if (err) return console.log(err.message);
-            res.json(result);
+            let collections = result[0];
+            let userCollection = result[1];
+            res.json({message: "success", collections: collections, userCollection: userCollection});
         });
     } catch (err) {
         console.error(err.message);

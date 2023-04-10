@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const dbConn = require("../db");
+const auth = require("../middleware/auth");
 
 // TODO: handle object not found errors in all routes.
 
-router.get("/", (req, res) => {
+router.get("/", auth, (req, res) => {
     try {
         let sql = `SELECT * FROM collection;`;
         dbConn.query(sql, (err, result) => {

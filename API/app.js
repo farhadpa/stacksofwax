@@ -4,9 +4,7 @@ const app = express();
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-const collectionsRoute = require('./routes/collections');
-const usersRoute = require('./routes/users');
-const authRoute = require('./routes/auth');
+const routes = require('./routes/routes');
 
 app.use(cookieParser());
 app.use(session({
@@ -15,12 +13,9 @@ app.use(session({
   saveUninitialized: true,
   age: 1000 * 60 * 60 * 1, // 1 hour
 }));
+
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/collections', collectionsRoute);
-app.use('/users', usersRoute);
-app.use('/auth', authRoute);
+app.use(routes);
 
-app.listen((process.env.PORT || 4004), () => {
-  console.log(`Server is running on ${process.env.PORT || 4004}`);
-});
+module.exports = app;

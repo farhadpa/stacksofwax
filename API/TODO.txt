@@ -1,0 +1,4 @@
+// TODO: handle object not found errors in all routes. (users)
+// TODO: handle object not found errors in all routes.(collections)
+// TODO: add validation functions to Models when created.
+// TODO: hash the password. move this to model layer.

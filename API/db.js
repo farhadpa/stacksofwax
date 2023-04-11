@@ -1,6 +1,7 @@
 
 require('dotenv').config();
 const mysql = require('mysql');
+const util = require('util');
 
 
 const connection = mysql.createPool({
@@ -21,4 +22,6 @@ connection.getConnection((err) => {
     console.log("Connected to the MySQL server.");
 });
 
-module.exports = connection;
+const query = util.promisify(connection.query).bind(connection);
+
+module.exports = query;

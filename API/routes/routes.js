@@ -13,7 +13,7 @@ routes.get('/user/logout', userControllers.signOut);
 routes.get('/collections', auth, collectionControllers.allCollections);
 routes.get('/collections/:id', collectionControllers.collectionById);
 routes.get('/collections/:id/reviews', collectionControllers.reviewsByCollectionId);
-routes.get('/collections/:id/reviews/:review_id', collectionControllers.reviewById);
+// routes.get('/collections/:id/reviews/:review_id', collectionControllers.reviewById);
 
 
 

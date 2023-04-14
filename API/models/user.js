@@ -1,6 +1,6 @@
-const sequelize = require('./dbConn');
+const sequelize = require('../db');
 const { DataTypes } = require('sequelize');
-// const model = require('./model'); 
+const bcrypt = require('bcrypt');
 
 const User = sequelize.define('user', {
     user_id: {
@@ -23,6 +23,11 @@ const User = sequelize.define('user', {
         validate: {
             min: 6,
         },
+        set(value) {
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(value, salt);
+            this.setDataValue('password', hash);
+        }
     },
     email: {
         type: DataTypes.STRING,
@@ -53,7 +58,7 @@ const User = sequelize.define('user', {
 User.associate = (models) => {
     User.hasMany(models.Collection, {
         foreignKey: 'user_id',
-        as: 'collections',
+        // as: 'collections',
         onDelete: 'cascade',
         onUpdate: 'cascade',
     });

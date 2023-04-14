@@ -1,6 +1,6 @@
 // this module is to initiate the associations between the models
 
-const sequelize = require("./dbConn");
+const sequelize = require("../db");
 const User = require("./user");
 const Genre = require("./genre");
 const Collection = require("./collection");
@@ -25,11 +25,13 @@ const models = {
 }
 
 // to initiate the associations
+const associate = () => {
 Object.keys(models).forEach((modelName) => {
     if (models[modelName].associate) {
         models[modelName].associate(models);
     }
 });
+};
+sequelize.sync();
 
-sequelize.sync({ alter: true });
-
+module.exports = associate;

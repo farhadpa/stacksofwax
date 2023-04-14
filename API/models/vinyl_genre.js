@@ -1,4 +1,4 @@
-const sequelize = require('./dbConn');
+const sequelize = require('../db');
 const { DataTypes } = require('sequelize');
 
 const Vinyl_Genre = sequelize.define('vinyl_genre', {

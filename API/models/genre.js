@@ -1,4 +1,4 @@
-const sequelize = require('./dbConn');
+const sequelize = require('../db');
 const { DataTypes } = require('sequelize');
 
 const Genre = sequelize.define('genre', {
@@ -17,6 +17,7 @@ Genre.associate = (models) => {
     Genre.belongsToMany(models.Vinyl, { 
         through: models.Vinyl_Genre,
         foreignKey: 'genre_id',
+        unique: false,
     });
 };
 

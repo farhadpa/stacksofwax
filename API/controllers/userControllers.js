@@ -14,15 +14,13 @@ const register = async (req, res) => {
     let { username, password, first_name, last_name, email } = req.body;
     // check if the username already exists.
     const result = await getUserByUserName(username);
-    if (result.length > 0) {
+    if (result) {
         res.json({ message: "username already exists" });
-        // if username doesn't exist, create a new user.
+    // if username doesn't exist, create a new user.
     } else {
-        // hash the password.
-        const hashedPassword = hashPassword(password);
         // create a new user.
-        const newUser = createUser(username, hashedPassword, first_name, last_name, email);
-        res.json({ message: "success" });
+        const newUser = await createUser(username, password, first_name, last_name, email);
+        res.json({ message: "success" , username: newUser.username + " has been created." });
     };
 };
 
@@ -37,8 +35,8 @@ const signIn = async (req, res) => {
     try {
         // if the username exists.
         const result = await getUserByUserName(username);
-        if (result.length > 0) {
-            let user = result[0];
+        if (result) {
+            let user = result.dataValues;
             // compare the password with the hashed password.
             const validPassword = bcrypt.compareSync(password, user.password);
             if (validPassword) {
@@ -88,12 +86,6 @@ const validateUser = (user) => {
     return schema.validate(user);
 };
 
-// hash the password. 
-const hashPassword = (password) => {
-    const saltRounds = 10;
-    const salt = bcrypt.genSaltSync(saltRounds);
-    return bcrypt.hashSync(password, salt);
-};
 
 
 module.exports = {

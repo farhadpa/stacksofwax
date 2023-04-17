@@ -6,11 +6,12 @@ const collectionControllers = require('../controllers/collectionControllers');
 
 const auth = require("../middleware/auth");
 
-routes.post('/user', userControllers.register);
-routes.post('/user/login', userControllers.signIn);
-routes.get('/user/logout', userControllers.signOut);
+routes.post('/users/register', userControllers.register);
+routes.post('/users/login', userControllers.signIn);
+routes.get('/users/logout', userControllers.signOut);
+routes.get('/users/:username', userControllers.getUserAndCollections);
 
-routes.get('/collections', auth, collectionControllers.allCollections);
+routes.get('/collections/', collectionControllers.allCollections);
 routes.get('/collections/:id', collectionControllers.collectionById);
 routes.get('/collections/:id/reviews', collectionControllers.reviewsByCollectionId);
 // routes.get('/collections/:id/reviews/:review_id', collectionControllers.reviewById);

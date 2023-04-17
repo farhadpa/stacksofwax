@@ -1,13 +1,12 @@
 const { getCollections, 
         getCollectionById, 
-        getReviewsByCollectionId, 
-        getReviewById } = require("../services/collectionServices");
+        getReviewsByCollectionId, } = require("../services/collectionServices");
 
 
 const allCollections = async (req, res) => {
     try {
         const collections = await getCollections();
-        res.json({ message: "success", collections: collections });
+        res.json({ message: "successfull", collections: collections });
     } catch (err) {
         console.error(err.message);
     }
@@ -16,8 +15,8 @@ const allCollections = async (req, res) => {
 const collectionById = async (req, res) => {
     const id = req.params.id;
     try {
-        const { collection, vinyls } = await getCollectionById(id);
-        res.json({ message: "success", collection: collection, vinyls: vinyls });
+        const collection = await getCollectionById(id);
+        res.json({ message: "success", collection: collection });
     } catch (err) {
         console.error(err.message);
     }

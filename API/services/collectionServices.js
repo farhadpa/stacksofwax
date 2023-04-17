@@ -1,9 +1,20 @@
 const Collection = require("../models/collection");
+const User = require("../models/user");
+const Vinyl = require("../models/vinyl");
+const Song = require("../models/song");
 
 // get all collections.
 const getCollections = async () => {
     try {
-        const collections = await Collection.findAll();
+        const collections = await Collection.findAll({
+            include: [
+                {
+                model: User,
+                as: 'users',
+                attributes: ['first_name', 'last_name', 'username']
+                }
+            ]
+    });
         return collections;
     } catch (err) {
         console.error(err.message);
@@ -12,9 +23,17 @@ const getCollections = async () => {
 
 const getCollectionById = async (id) => {
     try {
-        const collection = await Collection.findByPk(id , {include: 'vinyls'});
-        const vinyls = await collection.getVinyls();
-        return {collection, vinyls};
+        const collection = await Collection.findByPk(id , 
+            {include: [
+                    { model: Vinyl, as: 'vinyls', 
+                        include : [
+                         {model: Song, as: 'songs'} 
+                        ]
+                    },
+                ]
+            }        
+        );
+        return collection;
     } catch (err) {
         console.error(err.message);
     }

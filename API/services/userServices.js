@@ -34,8 +34,22 @@ const getUserByUserName = async (username) => {
     }
 };
 
+const getCollectionsByUserName = async (username) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                username: username
+            },
+            include: 'collections'
+        });
+        return user;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
 
 module.exports = {
     createUser,
-    getUserByUserName
+    getUserByUserName,
+    getCollectionsByUserName
 };

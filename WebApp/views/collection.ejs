@@ -1,0 +1,41 @@
+<%- include ( 'header.ejs' ); %>
+  <main>
+    <div>
+      <h2>
+        <%= data.collection.collection_name %>
+      </h2>
+      <img src="<%= data.collection.image %>" alt=<%=data.collection.collection_name%>>
+    </div>
+    <div>
+      <ul class="collection-list">
+
+        <% data.collection.vinyls.forEach( vinyl=> { %>
+
+          <li>
+
+            <a href="/vinyls/<%= vinyl.vinyl_id %>">
+              <h3>
+                <%= vinyl.vinyl_name %>
+              </h3>
+              <img src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>">
+            </a>
+
+            <% vinyl.songs.forEach (song=> { %>
+              
+              <div>
+              <p>
+                <%= song.song_name %> --by:
+                <%= song.song_artist %>
+              </p>
+              </div>
+
+              <% }) %>
+
+          </li>
+
+          <% }) %>
+
+      </ul>
+    </div>
+  </main>
+  <%- include ( 'footer.ejs' ); %>

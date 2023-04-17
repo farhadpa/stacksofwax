@@ -58,7 +58,7 @@ const User = sequelize.define('user', {
 User.associate = (models) => {
     User.hasMany(models.Collection, {
         foreignKey: 'user_id',
-        // as: 'collections',
+        as: 'collections',
         onDelete: 'cascade',
         onUpdate: 'cascade',
     });

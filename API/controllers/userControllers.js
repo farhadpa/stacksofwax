@@ -2,8 +2,18 @@
 const Joi = require("joi");
 // for hashing passwords.
 const bcrypt = require("bcrypt");
-const { createUser, getUserByUserName } = require("../services/userServices");
+const { createUser, getUserByUserName, getCollectionsByUserName } = require("../services/userServices");
 
+
+const getUserAndCollections = async (req, res) => {
+    const username = req.params.username;
+    try {
+        const user = await getCollectionsByUserName(username);
+        res.json({ message: "success", user: user });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
 
 // route to register a new user.
 const register = async (req, res) => {
@@ -42,6 +52,8 @@ const signIn = async (req, res) => {
             if (validPassword) {
                 // set the session.
                 req.session.user = user;
+                // await req.session.save();
+                console.log(res);
                 res.json({ message: "successfully logged in." });
                 // if the password is invalid.
             } else {
@@ -92,5 +104,6 @@ module.exports = {
     register,
     signIn,
     signOut,
+    getUserAndCollections
 
 };

@@ -36,6 +36,7 @@ const Collection = sequelize.define('collection', {
 Collection.associate = (models) => {
     Collection.belongsTo(models.User, {
         foreignKey: 'user_id',
+        as: 'users',
     });
     Collection.hasMany(models.Review, {
         foreignKey: 'collection_id',

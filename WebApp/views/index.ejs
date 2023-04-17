@@ -1,104 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Stacks Of Wax</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <header>
-      <div class="logo">
-        <a href="#">Vinyl Collection Sharing - Stacks of Wax</a>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Collections</a></li>
-          <li><a href="#">Create Collection</a></li>
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Register</a></li>
-        </ul>
-      </nav>
-    </header>
+    <%- include ( 'header.ejs' ); %>
     <main>
-      <section class="hero">
-        <div class="hero-text">
-          <h1>Share and Discover Vinyl Collections</h1>
-          <p>Join the vinyl community today and explore thousands of collections from around the world.</p>
-          <a href="#" class="btn">Get Started</a>
-        </div>
-        <div class="hero-image">
-          <img src="vinyl-collection.jpg" alt="Vinyl Collection">
-        </div>
-      </section>
-      <section class="collections">
-        <h2>Browse Collections</h2>
-        <div class="filters">
-          <label for="genre">Filter by Genre:</label>
-          <select id="genre">
-            <option value="all">All</option>
-            <option value="rock">Rock</option>
-            <option value="pop">Pop</option>
-            <option value="jazz">Jazz</option>
-            <option value="hip-hop">Hip Hop</option>
-          </select>
-        </div>
+        <%- include ( 'filterComponent.ejs' ) %>
         <ul class="collection-list">
             <% data.collections.forEach(collection => { %>
                 <li>
-                    <a href="#">
-                      <img src="collection2.jpg" alt="Collection 2">
-                      <h3><%= collection.collection_name %></h3>
-                      <p>Created by <%= collection.user_id %></p>
+                      <img src=<%= collection.image %> alt=<%=collection.collection_name%>>
+                      <a href="/collections/<%= collection.collection_id %>">
+                        <h3><%= collection.collection_name %></h3>
+                      </a>
+                      <a href="/users/<%= collection.users.username %>">Created by 
+                        <%= collection.users.first_name %> 
+                        <%= collection.users.last_name %>
+                      </a>
                       <div class="ratings">
-                        <span>4.0</span>
+                        <span> <%= collection.likes %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
                         <i class="fas fa-star"></i>
                       </div>
-                    </a>
+
                   </li>
             <% }) %>
-          <!-- <li>
-            <a href="#">
-              <img src="collection1.jpg" alt="Collection 1">
-              <h3>Classic Rock Collection</h3>
-              <p>Created by JohnDoe</p>
-              <div class="ratings">
-                <span>4.5</span>
-                <i class="fas fa-star"></i>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="collection2.jpg" alt="Collection 2">
-              <h3>90s Hip Hop Collection</h3>
-              <p>Created by JaneDoe</p>
-              <div class="ratings">
-                <span>4.0</span>
-                <i class="fas fa-star"></i>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <img src="collection3.jpg" alt="Collection 3">
-              <h3>Jazz Greats Collection</h3>
-              <p>Created by JazzMan</p>
-              <div class="ratings">
-                <span>5.0</span>
-                <i class="fas fa-star"></i>
-              </div>
-            </a>
-          </li> -->
         </ul>
       </section>
     </main>
-    <footer>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Terms and Conditions</a></li>
-      </ul>
-    </footer>
-  </body>
-</html>
+    <%- include ( 'footer.ejs' ); %>

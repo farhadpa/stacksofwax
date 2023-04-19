@@ -42,10 +42,10 @@ Vinyl.associate = (models) => {
         foreignKey: 'vinyl_id',
         unique: false,
     });
-    Vinyl.hasMany(models.Collection_Vinyl, {
-        foreignKey: 'vinyl_id',
+    // Vinyl.hasMany(models.Collection_Vinyl, {
+    //     foreignKey: 'vinyl_id',
 
-    });
+    // });
 };
 // Vinyl.sync({ alter: true });
 

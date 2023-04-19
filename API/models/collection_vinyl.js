@@ -17,13 +17,13 @@ const Collection_Vinyl = sequelize.define('collection_vinyl', {
     },
 });
 
-Collection_Vinyl.associate = (models) => {
-    Collection_Vinyl.belongsTo(models.Collection, {
-        foreignKey: 'collection_id',
-    });
-    Collection_Vinyl.belongsTo(models.Vinyl, {
-        foreignKey: 'vinyl_id',
-    });
-};
+// Collection_Vinyl.associate = (models) => {
+//     Collection_Vinyl.belongsTo(models.Collection, {
+//         foreignKey: 'collection_id',
+//     });
+//     Collection_Vinyl.belongsTo(models.Vinyl, {
+//         foreignKey: 'vinyl_id',
+//     });
+// };
 
 module.exports = Collection_Vinyl;

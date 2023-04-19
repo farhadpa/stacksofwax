@@ -62,6 +62,12 @@ User.associate = (models) => {
         onDelete: 'cascade',
         onUpdate: 'cascade',
     });
+    User.hasMany(models.Review, {
+        foreignKey: 'user_id',
+        as: 'reviews',
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+    });
 };
 
 // User.sync({ alter: true });

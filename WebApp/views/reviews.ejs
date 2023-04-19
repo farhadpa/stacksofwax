@@ -1,0 +1,13 @@
+<%- include ( 'header.ejs' ); %>
+  <main>
+    <div>
+        <% data.reviews.forEach( review => { %>
+          <div>
+            <h3><%= review.review_text %></h3>
+            <p><%= review.user.first_name %> <%= review.user.last_name %></p>
+          </div>
+
+       <% }) %>
+      
+  </main>
+  <%- include ( 'footer.ejs' ); %>

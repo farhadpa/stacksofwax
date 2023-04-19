@@ -1,7 +1,8 @@
 const Collection = require("../models/collection");
 const User = require("../models/user");
 const Vinyl = require("../models/vinyl");
-const Song = require("../models/song");
+const Genre = require("../models/genre");
+
 
 // get all collections.
 const getCollections = async () => {
@@ -27,7 +28,7 @@ const getCollectionById = async (id) => {
             {include: [
                     { model: Vinyl, as: 'vinyls', 
                         include : [
-                         {model: Song, as: 'songs'} 
+                         {model: Genre, as: 'genres'} 
                         ]
                     },
                 ]
@@ -39,21 +40,9 @@ const getCollectionById = async (id) => {
     }
 };
 
-const getReviewsByCollectionId = async (id) => {
-    try {
-        const collection = await Collection.findByPk(id , {include: 'reviews'});
-        const reviews = await collection.getReviews();
-        return reviews;
-    } catch (err) {
-        console.error(err.message);
-    }
-};
-
-
 module.exports = {
     getCollections,
     getCollectionById,
-    getReviewsByCollectionId,
 };
 
 

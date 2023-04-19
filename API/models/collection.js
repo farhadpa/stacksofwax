@@ -49,9 +49,9 @@ Collection.associate = (models) => {
         foreignKey: 'collection_id',
         otherKey: 'vinyl_id',
     });
-    Collection.hasMany(models.Collection_Vinyl, {
-        foreignKey: 'collection_id',
-    });
+    // Collection.hasMany(models.Collection_Vinyl, {
+    //     foreignKey: 'collection_id',
+    // });
 };
 
 // Collection.sync({ alter: true });

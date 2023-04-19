@@ -20,12 +20,11 @@
               <img src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>">
             </a>
 
-            <% vinyl.songs.forEach (song=> { %>
+            <% vinyl.genres.forEach (genre=> { %>
               
               <div>
               <p>
-                <%= song.song_name %> --by:
-                <%= song.song_artist %>
+                <%= genre.genre_name %> 
               </p>
               </div>
 
@@ -36,6 +35,18 @@
           <% }) %>
 
       </ul>
+    </div>
+    <div>
+      <a href="/collections/<%= data.collection.collection_id %>/reviews">
+        <button>
+          Reviews
+        </button>
+      </a>
+      <!-- <form action="/collections/<%= data.collection.collection_id %>?_method=DELETE" method="POST">
+        <button>
+          Delete
+        </button>
+      </form> -->
     </div>
   </main>
   <%- include ( 'footer.ejs' ); %>

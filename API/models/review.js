@@ -25,6 +25,9 @@ Review.associate = (models) => {
     Review.belongsTo(models.Collection, {
         foreignKey: 'collection_id',
     });
+    Review.belongsTo(models.User, {
+        foreignKey: 'user_id',
+    });
 };
 
 // Review.sync({ alter: true });

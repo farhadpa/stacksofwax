@@ -1,0 +1,29 @@
+
+<%- include ( 'header.ejs' ); %>
+  <main>
+    <div>
+      <h2>
+        <%= data.user.first_name + ' ' + data.user.last_name %>
+      </h2>
+    </div>
+    <div>
+        <ul class="collection-list">
+            <% data.user.collections.forEach(collection => { %>
+                <li>
+                      <img src=<%= collection.image %> alt=<%=collection.collection_name%>>
+                      <a href="/collections/<%= collection.collection_id %>">
+                        <h3><%= collection.collection_name %></h3>
+                      </a>
+
+                      <div class="ratings">
+                        <span> <%= collection.likes %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
+                        <i class="fas fa-star"></i>
+                      </div>
+
+                  </li>
+            <% }) %>
+        </ul>
+    </div>
+     
+  </main>
+  <%- include ( 'footer.ejs' ); %>

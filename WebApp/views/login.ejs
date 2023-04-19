@@ -1,18 +1,30 @@
-<%- include ('header.ejs') %>
-<form action="" method="POST" class="align-items-center">
 
-    <div class="mb-3 col-sm-3">
-      <label for="username" class="form-label">Username:</label>
-      <input type="text" class="form-control" id="username" name="username" required>
-    </div>
-  
-    <div class="mb-3 col-sm-3">
-      <label for="password" class="form-label">Password:</label>
-      <input type="password" class="form-control" id="password" name="password" required>
-    </div>
+  <%- include ('header.ejs') %>
+  <main class="container">
+  <div class="container d-flex justify-content-center align-items-center">
+    <form class="p-5 bg-light rounded shadow" action="/login" method="POST">
+      <h2 class="mb-4">Login</h2>
 
-  
-    <button type="submit" class="btn btn-primary" formaction="/login" formmethod="post">Login</button>
-  
-  </form>
-  <%- include ('footer.ejs') %>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+
+      <div class="mb-3">
+        <% if (error) { %>
+      <p> <%= error %> </p>
+      <% } %>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+  </main>
+<%- include ('footer.ejs') %>

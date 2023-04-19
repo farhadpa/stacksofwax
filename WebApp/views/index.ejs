@@ -1,25 +1,27 @@
-    <%- include ( 'header.ejs' ); %>
-    <main>
-        <%- include ( 'filterComponent.ejs' ) %>
-        <ul class="collection-list">
-            <% data.collections.forEach(collection => { %>
-                <li>
-                      <img src=<%= collection.image %> alt=<%=collection.collection_name%>>
-                      <a href="/collections/<%= collection.collection_id %>">
-                        <h3><%= collection.collection_name %></h3>
-                      </a>
-                      <a href="/users/<%= collection.users.username %>">Created by 
-                        <%= collection.users.first_name %> 
-                        <%= collection.users.last_name %>
-                      </a>
-                      <div class="ratings">
-                        <span> <%= collection.likes %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
-                        <i class="fas fa-star"></i>
-                      </div>
 
-                  </li>
-            <% }) %>
-        </ul>
-      </section>
-    </main>
-    <%- include ( 'footer.ejs' ); %>
+<%- include ( 'header.ejs' ); %>
+<main class="container mt-5">
+  <%- include ( 'filterComponent.ejs' ) %>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+    <% data.collections.forEach(collection => { %>
+      <div class="col mb-4">
+        <div class="card h-100">
+          <img src=<%= collection.image %> alt=<%=collection.collection_name%> class="card-img-top">
+          <div class="card-body">
+            <a href="/collections/<%= collection.collection_id %>">
+              <h3 class="card-title"><%= collection.collection_name %></h3>
+            </a>
+            <a href="/users/<%= collection.users.username %>">Created by <%= collection.users.first_name %> <%= collection.users.last_name %></a>
+            <div class="card-text">
+              <div class="ratings">
+                <span> <%= collection.likes %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</main>
+<%- include ( 'footer.ejs' ); %>

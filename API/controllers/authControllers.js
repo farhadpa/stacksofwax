@@ -37,29 +37,18 @@ const signIn = async (req, res) => {
             // compare the password with the hashed password.
             const validPassword = bcrypt.compareSync(password, user.password);
             if (validPassword) {
-                // set the session.
-                req.session.user = user;
-                // await req.session.save();
-                res.json({ message: "successfully logged in." });
+                res.json({ message: "successfully logged in.", user: {user_id: user.user_id, username:user.username}});
                 // if the password is invalid.
             } else {
-                res.status(401).json({ message: "Invalid username or password" });
+                res.json({ message: "Invalid username or password" });
             }
             // if the username doesn't exist.
         } else {
-            res.status(401).json({ message: "Invalid username or password" });
+            res.json({ message: "Invalid username or password" });
         }
     } catch (err) {
         console.error(err.message);
     }
-};
-
-
-// to logout a user.
-const signOut = (req, res) => {
-    // destroy the session.
-    req.session.destroy();
-    res.json({ message: "successfully logged out." });
 };
 
 
@@ -87,5 +76,4 @@ const validateUser = (user) => {
 module.exports = {
     register,
     signIn,
-    signOut
 };

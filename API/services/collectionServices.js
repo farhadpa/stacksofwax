@@ -40,9 +40,24 @@ const getCollectionById = async (id) => {
     }
 };
 
+const createNewCollection = async (collection_name, collection_desc, image, user_id) => {
+    try {
+        const newCollection = await Collection.create({
+            collection_name: collection_name,
+            collection_desc: collection_desc,
+            image: image,
+            user_id: user_id
+        });
+        return newCollection;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 module.exports = {
     getCollections,
     getCollectionById,
+    createNewCollection,
 };
 
 

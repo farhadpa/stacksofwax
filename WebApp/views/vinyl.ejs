@@ -1,10 +1,27 @@
-
 <%- include ( 'header.ejs' ); %>
-  <main>
-    <div>
-      <h2>
-        <%= data.vinyl.vinyl_name %>
-      </h2>
-      
+  <main class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2><%= data.vinyl.vinyl_name %></h2>
+        <img src="<%= data.vinyl.image %>" alt="<%= data.vinyl.vinyl_name %>" class="img-fluid mb-3">
+        <div class="mb-3">
+          <p>Genres:</p>
+          <% data.vinyl.genres.forEach( genre => { %>
+            <span class="badge bg-secondary me-2"><%= genre.genre_name %></span>
+          <% }) %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3 class="mb-3">Songs:</h3>
+        <ul class="list-group">
+          <% data.vinyl.songs.forEach( song => { %>
+            <li class="list-group-item">
+              <h5><%= song.song_name %></h5>
+              <p><%= song.song_artist %></p>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
   </main>
-  <%- include ( 'footer.ejs' ); %>
+<%- include ( 'footer.ejs' ); %>

@@ -1,29 +1,34 @@
+  <%- include('header.ejs'); %>
 
-<%- include ( 'header.ejs' ); %>
-  <main>
+  <main class="container mt-4">
     <div>
-      <h2>
-        <%= data.user.first_name + ' ' + data.user.last_name %>
-      </h2>
+      <h2><%= data.user.first_name + ' ' + data.user.last_name %></h2>
     </div>
     <div>
-        <ul class="collection-list">
-            <% data.user.collections.forEach(collection => { %>
-                <li>
-                      <img src=<%= collection.image %> alt=<%=collection.collection_name%>>
-                      <a href="/collections/<%= collection.collection_id %>">
-                        <h3><%= collection.collection_name %></h3>
-                      </a>
-
-                      <div class="ratings">
-                        <span> <%= collection.likes %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
-                        <i class="fas fa-star"></i>
-                      </div>
-
-                  </li>
-            <% }) %>
-        </ul>
+      <ul class="list-group">
+        <% data.user.collections.forEach(collection => { %>
+          <li class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-12 col-md-4">
+                <img src=<%= collection.image %> alt=<%=collection.collection_name%> class="img-fluid">
+              </div>
+              <div class="col-12 col-md-8">
+                <a href="/collections/<%= collection.collection_id %>">
+                  <h3><%= collection.collection_name %></h3>
+                </a>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="ratings">
+                    <span> <%= collection.likes %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
     </div>
-     
   </main>
-  <%- include ( 'footer.ejs' ); %>
+  
+  <%- include('footer.ejs'); %>
+  

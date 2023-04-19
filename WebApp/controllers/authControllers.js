@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const getSingIn = async (req, res) => {
     try {
-        res.render('login');
+        res.render('login', {error: ''});
     } catch (error) {
         console.log(error.message);
     } 
@@ -12,16 +12,26 @@ const signIn = async (req, res) => {
     try {
         let endpoint = 'http://localhost:4000/users/login';
         let response = await axios.post(endpoint, req.body, {withCredentials: true});
-        // console.log(response.headers['set-cookie'][0].split(';')[0].split('=')[1]);
-
-        res.cookie('connect.sid' , response.headers['set-cookie'][0].split(';')[0].split('=')[1], {maxAge: 36000000, httpOnly: true});
-        // res.cookie(JSON.parse(response.headers))
-        res.send('login success');
-        // res.redirect('/collections');
+        if (response.data.message === 'successfully logged in.') {
+            req.session.user = response.data.user;
+            req.session.auth = true;
+            res.redirect('/users/' + req.session.user.username);
+        } else {
+            res.render('login', {error: response.data.message});
+        }
     } catch (error) {
         console.log(error.message);
     }
 }
+
+const signOut = async (req, res) => {
+    try {
+        req.session.destroy();
+        res.redirect('/login');
+    } catch (error) {
+        console.log(error.message);
+    }
+};
 
 const getRegister = async (req, res) => {
     try {
@@ -44,6 +54,7 @@ const register = async (req, res) => {
 module.exports = {
     getSingIn,
     signIn,
+    signOut,
     getRegister,
     register,
 }

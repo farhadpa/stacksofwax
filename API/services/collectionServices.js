@@ -68,11 +68,50 @@ const updateCollection = async (attributes, collection_id) => {
     }
 };
 
+const removeVinylFromCollection = async (collection_id, vinyl_id) => {
+    try {
+        let collection = await Collection.findByPk(collection_id);
+        let vinyl = await Vinyl.findByPk(vinyl_id);
+        await collection.removeVinyl(vinyl);
+        const collectionAfterRemove = await getCollectionById(collection_id);
+        return collectionAfterRemove;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+const addVinylToCollection = async (collection_id, vinyl_id) => {
+    try {
+        let collection = await Collection.findByPk(collection_id);
+        let vinyl = await Vinyl.findByPk(vinyl_id);
+        await collection.addVinyl(vinyl);
+        const collectionAfterAdd = await getCollectionById(collection_id);
+        return collectionAfterAdd;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+const deleteCollectionById = async (collection_id) => {
+    try {
+        const deletedCollection = await Collection.destroy({
+            where: {
+                collection_id: collection_id
+            }
+        });
+        return deletedCollection;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+
 module.exports = {
     getCollections,
     getCollectionById,
     createNewCollection,
-    updateCollection
+    updateCollection,
+    removeVinylFromCollection,
+    addVinylToCollection,
+    deleteCollectionById,
 };
-
-

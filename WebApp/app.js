@@ -18,6 +18,7 @@ app.use(session({
   age: 1000 * 60 * 60 * 1, // 1 hour
 }));
 app.use((req, res, next) => {
+    res.locals.isAuthenticated = req.session.auth;
     res.locals.user = req.session.user;
     next();
 });

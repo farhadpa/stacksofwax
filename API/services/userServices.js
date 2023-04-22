@@ -16,6 +16,21 @@ const getCollectionsByUserName = async (username) => {
     }
 };
 
+const getVinylsByUserName = async (username) => {
+    try {
+        const user = await User.findOne({
+            where: {
+                username: username
+            },
+        });
+        const vinyls = await user.getVinyls({include: 'genres'});
+        return vinyls;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 module.exports = {
-    getCollectionsByUserName
+    getCollectionsByUserName,
+    getVinylsByUserName,
 };

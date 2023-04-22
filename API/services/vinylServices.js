@@ -33,7 +33,29 @@ const createNewVinyl = async (attributes, genres, songs) => {
     }
 };
 
+const deleteVinylById = async (id) => {
+    try {
+        const vinyl = await Vinyl.findByPk(id);
+        await vinyl.destroy();
+        return vinyl;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+// to get all genres
+const getGenres = async () => {
+    try {
+        const genres = await Genre.findAll();
+        return genres;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 module.exports = {
     getVinylById,
     createNewVinyl,
+    getGenres,
+    deleteVinylById,
 };

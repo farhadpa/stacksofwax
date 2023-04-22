@@ -1,4 +1,9 @@
-const { getVinylById, createNewVinyl } = require("../services/vinylServices");
+const { 
+    getVinylById, 
+    createNewVinyl, 
+    getGenres,
+    deleteVinylById 
+} = require("../services/vinylServices");
 
 const vinylById = async (req, res) => {
     try {
@@ -23,7 +28,10 @@ const createVinyl = async (req, res) => {
         user_id: req.body.user_id,
 
     };
-    const genres = req.body.genres;
+    let genres = req.body.genres;
+    if (typeof genres === "string") {
+        genres = [genres];
+    }
     const songs = req.body.songs;
     console.log(attributes);
     console.log(genres);
@@ -36,7 +44,29 @@ const createVinyl = async (req, res) => {
     }
 };
 
+const deleteVinyl = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const vinyl = await deleteVinylById(id);
+        res.json({ message: "success", vinyl: vinyl });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+const getAllGenres = async (req, res) => {
+    try {
+        const genres = await getGenres();
+        res.json({ message: "success", genres: genres });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+
 module.exports = {
     vinylById,
     createVinyl,
+    getAllGenres,
+    deleteVinyl,
 };

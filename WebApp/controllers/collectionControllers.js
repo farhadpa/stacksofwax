@@ -24,8 +24,9 @@ const getCollectionById = async (req, res) => {
 };
 
 const likeCollection = async (req, res) => {
-    let id = req.params.id;
-    let endpoint = `http://localhost:4000/update/collections/${id}/like`;
+    let id = req.params.collection_id;
+    let user_id = req.session.user.user_id;
+    let endpoint = `http://localhost:4000/collections/${id}/like/${user_id}`;
     try {
         let response = await axios.post(endpoint, {withCredentials: true});
         res.redirect(`/collections/${id}`);
@@ -39,10 +40,8 @@ const getCreateCollection = async (req, res) => {
 };
 
 const createCollection = async (req, res) => {
-    console.log(req.body, req.file.path, req.file.mimetype);
     req.body.image = '/uploads/' + req.file.filename;
     req.body.user_id = req.session.user.user_id;
-    console.log(req.body, 'before axios');
     try {
         let response = await axios.post('http://localhost:4000/create/collections', req.body, {withCredentials: true});
         res.redirect(`/users/${req.session.user.username}`);

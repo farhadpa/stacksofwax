@@ -1,4 +1,12 @@
-const { getCollections, getCollectionById, createNewCollection, updateCollection } = require("../services/collectionServices");
+const { 
+    getCollections, 
+    getCollectionById, 
+    createNewCollection, 
+    updateCollection,
+    removeVinylFromCollection,
+    addVinylToCollection,
+    deleteCollectionById,
+ } = require("../services/collectionServices");
 
 
 const allCollections = async (req, res) => {
@@ -46,9 +54,45 @@ const likeCollection = async (req, res) => {
     }
 };
 
+const removeVinylFromCollectionController = async (req, res) => {
+    const id = req.params.id;
+    const vinyl_id = req.params.vinyl_id;
+    try {
+        const collection = await removeVinylFromCollection(id, vinyl_id);
+        res.json({ message: "success", collection: collection });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+const addVinylToCollectionController = async (req, res) => {
+    const id = req.params.id;
+    const vinyl_id = req.params.vinyl_id;
+    try {
+        const collection = await addVinylToCollection(id, vinyl_id);
+        res.json({ message: "success", collection: collection });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+const deleteCollection = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const collection = await deleteCollectionById(id);
+        res.json({ message: "success", collection: collection });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+
 module.exports = {
     allCollections,
     collectionById,
     createCollection,
     likeCollection,
+    removeVinylFromCollectionController,
+    addVinylToCollectionController,
+    deleteCollection,
 };

@@ -11,11 +11,13 @@
         <a href="/collections/<%= data.collection.collection_id %>/reviews" class="btn btn-primary me-3">
           Reviews
         </a>
-        <form action="/collections/<%= data.collection.collection_id %>/like" method="post">
+        <% if (isAuthenticated && !(user.username === data.collection.users.username)) {%>
+        <form action="/collections/<%= data.collection.collection_id %>/like/<%= user.user_id %>" method="post">
         <button type="submit" class="btn btn-primary me-3" >
           Like this collection
         </button>
         </form>
+        <% } %>
         <!-- <form action="/collections/<%= data.collection.collection_id %>?_method=DELETE" method="POST">
           <button class="btn btn-danger">
             Delete

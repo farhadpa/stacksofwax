@@ -8,7 +8,7 @@
         </div>
         <div>
             <ul class="list-group">
-                <% data.user.collections.forEach(collection=> { %>
+                <% data.user.collections.forEach(collection => { %>
                     <li class="list-group-item">
                         <div class="row align-items-center">
                             <div class="col-12 col-md-4">
@@ -56,6 +56,11 @@
             <form action="/create/collections" method="get">
                 <button type="submit" class="btn btn-primary me-3">
                     Create New Collection
+                </button>
+            </form>
+            <form action="/profile/<%= user.username %>/vinyls" method="get">
+                <button type="submit" class="btn btn-primary me-3">
+                    Manage Your Vinyls
                 </button>
             </form>
         </div>

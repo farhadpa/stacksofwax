@@ -20,5 +20,8 @@
 
         <button type="submit" class="btn btn-primary">Create Collection</button>
     </form>
+    <form action="/profile/<%= user.username %>" method="get">
+        <input type="submit" value="Cancel/Back to Profile" class="btn btn-primary" id="backToProfile">
+      </form>
 </main>
     <%- include('footer.ejs'); %>

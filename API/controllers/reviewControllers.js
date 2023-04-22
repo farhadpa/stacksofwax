@@ -1,27 +1,28 @@
-const { getReviewsByCollectionId } = require("../services/reviewServices.js");
+const { getReviewsByCollectionId, createNewReview } = require("../services/reviewServices.js");
 
 
 const reviewsByCollectionId = async (req, res) => {
     try {
         const reviews = await getReviewsByCollectionId(req.params.id);
-        res.json({ message: "success", reviews: reviews });
+        res.json({ message: "success", reviews: reviews , collection_id: req.params.id});
     } catch (err) {
         console.error(err.message);
     }
 };
 
-// const reviewById = async (req, res) => {
-//     try {
-//         let collection_id = req.params.id;
-//         let review_id = req.params.review_id;
-//         const review = await getReviewById(collection_id, review_id);
-//         res.json({ message: "success", review: review });
-//     } catch (err) {
-//         console.error(err.message);
-//     }
-// };
+const createReviewForCollection = async (req, res) => {
+    try {
+        const { collection_id, user_id, review_text } = req.body;
+        const newReview = await createNewReview(collection_id, user_id, review_text);
+        res.json({ message: "success", review: newReview });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 
 module.exports = {
     reviewsByCollectionId,
+    createReviewForCollection,
     // reviewById,
 };

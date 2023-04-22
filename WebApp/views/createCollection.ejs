@@ -1,0 +1,24 @@
+<%- include('header.ejs'); %>
+<main class="container">
+    <h1 class="my-4">Create Vinyl Collection</h1>
+
+    <form action="/create/collections" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="collection_name" class="form-label">Collection Name:</label>
+            <input type="text" class="form-control" id="collection_name" name="collection_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="collection_desc" class="form-label">Collection Description:</label>
+            <textarea class="form-control" id="collection_desc" name="collection_desc" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Collection Image:</label>
+            <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Collection</button>
+    </form>
+</main>
+    <%- include('footer.ejs'); %>

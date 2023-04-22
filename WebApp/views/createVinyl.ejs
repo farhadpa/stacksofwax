@@ -1,0 +1,82 @@
+<%- include ( 'header.ejs' ); %>
+<div class="container">
+    <h1>Create Vinyl</h1>
+    <form action="/create/vinyl" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="vinyl_name">Vinyl Name</label>
+        <input type="text" class="form-control" id="vinyl_name" name="vinyl_name" required>
+      </div>
+      <div class="form-group">
+        <label for="vinyl_desc">Vinyl Description</label>
+        <textarea class="form-control" id="vinyl_desc" name="vinyl_desc" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="vinyl_image">Vinyl Image</label>
+        <input type="file" class="form-control-file" id="image" name="image">
+      </div>
+      <div class="form-group">
+        <label for="vinyl_genre">Vinyl Genre</label>
+        <select multiple class="form-control" id="vinyl_genre" name="genres[]">
+          <option value="rock">Rock</option>
+          <option value="pop">Pop</option>
+          <option value="jazz">Jazz</option>
+          <option value="blues">Blues</option>
+          <option value="hip-hop">Hip Hop</option>
+        </select>
+      </div>
+      <div class="form-group" id="songs-container">
+        <label>Songs</label>
+        <div class="song">
+          <div class="form-group">
+            <label for="song_name_1">Song Name</label>
+            <input type="text" class="form-control" id="song_name_1" name="songs[0][song_name]" required>
+          </div>
+          <div class="form-group">
+            <label for="song_desc_1">Song Description</label>
+            <textarea class="form-control" id="song_desc_1" name="songs[0][song_desc]" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="song_artist_1">Song Artist</label>
+            <input type="text" class="form-control" id="song_artist_1" name="songs[0][song_artist]" required>
+          </div>
+        </div>
+        
+      </div>
+      <button type="button" class="btn btn-primary" id="add-song">Add Song</button>
+      <button type="submit" class="btn btn-primary">Create Vinyl</button>
+    </form>
+  </div>
+  
+  <script>
+$(document).ready(function() {
+  let songCount = 1;
+  
+  // Add new song form on click
+  $("#add-song").click(function() {
+    songCount++;
+    let newSong = `
+      <div class="song">
+        <hr>
+        <div class="form-group">
+          <label for="song_name_${songCount}">Song Name</label>
+          <input type="text" class="form-control" id="song_name_${songCount}" name="songs[${songCount-1}][song_name]" required>
+        </div>
+        <div class="form-group">
+          <label for="song_desc_${songCount}">Song Description</label>
+          <textarea class="form-control" id="song_desc_${songCount}" name="songs[${songCount-1}][song_desc]" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="song_artist_${songCount}">Song Artist</label>
+          <input type="text" class="form-control" id="song_artist_${songCount}" name="songs[${songCount-1}][song_artist]" required>
+        </div>
+      </div>
+    `;
+    $("#songs-container").append(newSong);
+  });
+});
+
+    </script>
+
+
+<%- include ( 'footer.ejs' ); %>
+  

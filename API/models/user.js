@@ -68,6 +68,18 @@ User.associate = (models) => {
         onDelete: 'cascade',
         onUpdate: 'cascade',
     });
+    User.hasMany(models.Vinyl, {
+        foreignKey: 'user_id',
+        as: 'vinyls',
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+    });
+    User.hasMany(models.Like, {
+        foreignKey: 'user_id',
+        as: 'likes',
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+    });
 };
 
 // User.sync({ alter: true });

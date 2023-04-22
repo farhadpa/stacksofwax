@@ -37,7 +37,16 @@ const signIn = async (req, res) => {
             // compare the password with the hashed password.
             const validPassword = bcrypt.compareSync(password, user.password);
             if (validPassword) {
-                res.json({ message: "successfully logged in.", user: {user_id: user.user_id, username:user.username}});
+                res.json({ 
+                    message: "successfully logged in.", 
+                    user: {
+                        user_id: user.user_id, 
+                        username:user.username, 
+                        first_name: user.first_name, 
+                        last_name: user.last_name, 
+                        email: user.email
+                    }
+                });
                 // if the password is invalid.
             } else {
                 res.json({ message: "Invalid username or password" });

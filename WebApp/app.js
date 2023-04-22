@@ -7,6 +7,7 @@ const routes = require('./routes/routes');
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public/'));
+// app.use(express.static(__dirname + '/uploads/'));
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));

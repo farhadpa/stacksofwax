@@ -37,16 +37,16 @@ Vinyl.associate = (models) => {
         otherKey: 'collection_id',
         unique: false,
     });
-    Vinyl.belongsToMany(models.Song, {
-        through: models.Vinyl_Song,
+    Vinyl.hasMany(models.Song, {
         foreignKey: 'vinyl_id',
-        unique: false,
+        // as: 'songs',
     });
-    // Vinyl.hasMany(models.Collection_Vinyl, {
-    //     foreignKey: 'vinyl_id',
-
-    // });
+    Vinyl.belongsTo(models.User, {
+        foreignKey: 'user_id',
+        as: 'user',
+    });
 };
+
 // Vinyl.sync({ alter: true });
 
 module.exports = Vinyl;

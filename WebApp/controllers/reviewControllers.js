@@ -10,6 +10,19 @@ const getReviewsByCollectionId = async (req, res) => {
     }
 };
 
+const addReviewToCollection = async (req, res) => {
+    req.body.user_id = req.session.user.user_id;
+    req.body.collection_id = req.params.id;
+    try {
+        let endpoint = `http://localhost:4000/create/review`;
+        let response = await axios.post(endpoint, req.body, {withCredentials: true});
+        res.redirect(`/collections/${req.params.id}/reviews`);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
 module.exports = {
     getReviewsByCollectionId,
+    addReviewToCollection,
 };

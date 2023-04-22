@@ -22,7 +22,7 @@ const Collection = sequelize.define('collection', {
         type: DataTypes.STRING,
         allowNull: true,
     },
-    likes: {
+    likes_count: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 0,
@@ -49,9 +49,12 @@ Collection.associate = (models) => {
         foreignKey: 'collection_id',
         otherKey: 'vinyl_id',
     });
-    // Collection.hasMany(models.Collection_Vinyl, {
-    //     foreignKey: 'collection_id',
-    // });
+    Collection.hasMany(models.Like, {
+        foreignKey: 'collection_id',
+        as: 'likes',
+        onDelete: 'cascade',
+        onUpdate: 'cascade',
+    });
 };
 
 // Collection.sync({ alter: true });

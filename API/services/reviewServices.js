@@ -18,6 +18,20 @@ const getReviewsByCollectionId = async (id) => {
     }
 };
 
+const createNewReview = async (collection_id, user_id, review) => {
+    try {
+        const newReview = await Review.create({
+            review_text: review,
+            collection_id: collection_id,
+            user_id: user_id,
+        });
+        return newReview;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 module.exports = {
     getReviewsByCollectionId,
+    createNewReview,
 };

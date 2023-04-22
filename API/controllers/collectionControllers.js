@@ -1,4 +1,4 @@
-const { getCollections, getCollectionById, createNewCollection } = require("../services/collectionServices");
+const { getCollections, getCollectionById, createNewCollection, updateCollection } = require("../services/collectionServices");
 
 
 const allCollections = async (req, res) => {
@@ -32,8 +32,23 @@ const createCollection = async (req, res) => {
     }
 };
 
+const likeCollection = async (req, res) => {
+    const id = req.params.id;
+    try {
+        const collection = await getCollectionById(id);
+        const newLikes = collection.likes_count + 1;
+        console.log(newLikes)
+        const updatedCollection = await updateCollection({ likes_count: newLikes }, id);
+        console.log(updatedCollection);
+        res.json({ message: "success", collection: updatedCollection });
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 module.exports = {
     allCollections,
     collectionById,
     createCollection,
+    likeCollection,
 };

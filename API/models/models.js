@@ -9,7 +9,7 @@ const Vinyl = require("./vinyl");
 const Song = require("./song");
 const Collection_Vinyl = require("./collection_vinyl");
 const Vinyl_Genre = require("./vinyl_genre");
-const Vinyl_Song = require("./vinyl_song");
+const Like = require("./like");
 
 
 const models = {
@@ -21,7 +21,7 @@ const models = {
     Song : Song,
     Collection_Vinyl : Collection_Vinyl,
     Vinyl_Genre : Vinyl_Genre,
-    Vinyl_Song : Vinyl_Song,
+    Like : Like,
 }
 
 // to initiate the associations

@@ -23,18 +23,40 @@ const getCollectionById = async (req, res) => {
     }
 };
 
-const getReviewsByCollectionId = async (req, res) => {
+const likeCollection = async (req, res) => {
+    let id = req.params.id;
+    let endpoint = `http://localhost:4000/update/collections/${id}/like`;
     try {
-        let endpoint = `http://localhost:4000/collections/${req.params.id}/reviews`;
-        let response = await axios.get(endpoint, {withCredentials: true});
-        res.render('reviews', {data: response.data});
+        let response = await axios.post(endpoint, {withCredentials: true});
+        res.redirect(`/collections/${id}`);
     } catch (error) {
         console.log(error.message);
     }
 };
 
+const getCreateCollection = async (req, res) => {
+    res.render('createCollection');
+};
+
+const createCollection = async (req, res) => {
+    console.log(req.body, req.file.path, req.file.mimetype);
+    req.body.image = '/uploads/' + req.file.filename;
+    req.body.user_id = req.session.user.user_id;
+    console.log(req.body, 'before axios');
+    try {
+        let response = await axios.post('http://localhost:4000/create/collections', req.body, {withCredentials: true});
+        res.redirect(`/users/${req.session.user.username}`);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+
+
 module.exports = {
     getCollections,
     getCollectionById,
-    getReviewsByCollectionId,
+    likeCollection,
+    createCollection,
+    getCreateCollection
 }

@@ -14,7 +14,7 @@
             <a href="/users/<%= collection.users.username %>">Created by <%= collection.users.first_name %> <%= collection.users.last_name %></a>
             <div class="card-text">
               <div class="ratings">
-                <span> <%= collection.likes %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
+                <span> <%= collection.likes_count %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
                 <i class="fas fa-star"></i>
               </div>
             </div>
@@ -23,5 +23,7 @@
       </div>
     <% }) %>
   </div>
+ 
 </main>
+<img src="uploads/1682021429256--ArcoLinux_2023-02-02_12-27-22.png" alt="adsfadkflafd">
 <%- include ( 'footer.ejs' ); %>

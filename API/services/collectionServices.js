@@ -26,6 +26,7 @@ const getCollectionById = async (id) => {
     try {
         const collection = await Collection.findByPk(id , 
             {include: [
+                    { model: User, as: 'users', attributes: ['first_name', 'last_name', 'username'] },
                     { model: Vinyl, as: 'vinyls', 
                         include : [
                          {model: Genre, as: 'genres'} 
@@ -54,10 +55,24 @@ const createNewCollection = async (collection_name, collection_desc, image, user
     }
 };
 
+const updateCollection = async (attributes, collection_id) => {
+    try {
+        const updatedCollection = await Collection.update(attributes, {
+            where: {
+                collection_id : collection_id
+            }
+        });
+        return updatedCollection;
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
 module.exports = {
     getCollections,
     getCollectionById,
     createNewCollection,
+    updateCollection
 };
 
 

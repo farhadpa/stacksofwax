@@ -21,7 +21,7 @@
     flex: 1;
   }
   
-  a {
+  /* a {
     text-decoration: none;
     color: #333;
   }
@@ -183,4 +183,4 @@
   .ratings {
     display: flex;
     align-items: center;
-  }  
+  }   */

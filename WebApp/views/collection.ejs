@@ -1,16 +1,21 @@
-
-
-  <%- include ( 'header.ejs' ); %>
+<%- include ( 'header.ejs' ); %>
 
   <main class="container mt-5">
     <div class="row mb-5">
       <div class="col-md-6">
-        <h2><%= data.collection.collection_name %></h2>
+        <h2>
+          <%= data.collection.collection_name %>
+        </h2>
       </div>
       <div class="col-md-6 text-md-end">
         <a href="/collections/<%= data.collection.collection_id %>/reviews" class="btn btn-primary me-3">
           Reviews
         </a>
+        <form action="/collections/<%= data.collection.collection_id %>/like" method="post">
+        <button type="submit" class="btn btn-primary me-3" >
+          Like this collection
+        </button>
+        </form>
         <!-- <form action="/collections/<%= data.collection.collection_id %>?_method=DELETE" method="POST">
           <button class="btn btn-danger">
             Delete
@@ -18,32 +23,51 @@
         </form> -->
       </div>
     </div>
-  
+
     <div class="row mb-5">
       <div class="col-md-4">
         <img src="<%= data.collection.image %>" alt=<%=data.collection.collection_name%>>
       </div>
     </div>
-  
-    <ul class="row collection-list">
-      <% data.collection.vinyls.forEach(vinyl => { %>
-      <li class="col-md-4">
-        <a href="/vinyls/<%= vinyl.vinyl_id %>">
-          <div class="card">
-            <img src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>" class="card-img-top">
-            <div class="card-body">
-              <h5 class="card-title"><%= vinyl.vinyl_name %></h5>
-              <% vinyl.genres.forEach(genre => { %>
-                <p class="card-text"><%= genre.genre_name %></p>
-              <% }) %>
-            </div>
-          </div>
+
+    <div class="row mb-5">
+      <div class="col-md-4">
+        <a href="/users/<%= data.collection.users.username %>">
+          <%= data.collection.users.first_name %>
+            <%= data.collection.users.last_name %>
         </a>
-      </li>
-      <% }) %>
+      </div>
+    </div>
+    <div class="ratings">
+      <span>
+        <%= data.collection.likes_count %> <i class="fa fa-thumbs-up" style="font-size:24px"></i>
+      </span>
+      <i class="fas fa-star"></i>
+    </div>
+
+
+    <ul class="row collection-list">
+      <% data.collection.vinyls.forEach(vinyl=> { %>
+        <li class="col-md-4">
+          <a href="/vinyls/<%= vinyl.vinyl_id %>">
+            <div class="card">
+              <img src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>" class="card-img-top">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <%= vinyl.vinyl_name %>
+                </h5>
+                <% vinyl.genres.forEach(genre=> { %>
+                  <p class="card-text">
+                    <%= genre.genre_name %>
+                  </p>
+                  <% }) %>
+              </div>
+            </div>
+          </a>
+        </li>
+        <% }) %>
     </ul>
-  
+
   </main>
-  
+
   <%- include ( 'footer.ejs' ); %>
-  

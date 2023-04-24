@@ -6,16 +6,20 @@
     <% data.collections.forEach(collection => { %>
       <div class="col mb-4">
         <div class="card h-100">
-          <img src=<%= collection.image %> alt=<%=collection.collection_name%> class="card-img-top">
+          <div class="embed-responsive embed-responsive-16by9">
+          <img src=<%= collection.image %> alt=<%=collection.collection_name%> class="card-img-top ">
+          </div>
           <div class="card-body">
             <a href="/collections/<%= collection.collection_id %>">
-              <h3 class="card-title"><%= collection.collection_name %></h3>
+              <h4 class="card-title"><%= collection.collection_name %></h4>
             </a>
             <a href="/users/<%= collection.users.username %>">Created by <%= collection.users.first_name %> <%= collection.users.last_name %></a>
-            <div class="card-text">
-              <div class="ratings">
-                <span> <%= collection.likes_count %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
-                <i class="fas fa-star"></i>
+            <div class="card-text mt-2">
+              <div class="ratings d-flex">
+                 <%= collection.likes_count %> 
+                 <span class="material-icons " style="margin-left: 5px;">
+                  thumb_up_off_alt
+                  </span>
               </div>
             </div>
           </div>
@@ -25,5 +29,4 @@
   </div>
  
 </main>
-<img src="uploads/1682021429256--ArcoLinux_2023-02-02_12-27-22.png" alt="adsfadkflafd">
 <%- include ( 'footer.ejs' ); %>

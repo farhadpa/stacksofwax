@@ -9,59 +9,55 @@
         <div>
             <ul class="list-group">
                 <% data.user.collections.forEach(collection => { %>
-                    <li class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md-4">
-                                <img src=<%=collection.image %> alt=<%=collection.collection_name%> class="img-fluid">
-                            </div>
-                            <div class="col-12 col-md-8">
-                                <div class="d-flex justify-content-between">
-                                    <div>
-                                        <h3>
-                                            <%= collection.collection_name %>
-                                        </h3>
-                                    </div>
-                                    <div>
-                                        <form
-                                            action="/profile/<%= user.username %>/collections/<%= collection.collection_id %>"
-                                            method="get">
-                                            <button type="submit" class="btn btn-danger me-3">
-                                                Edit Collection
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="ratings">
-                                        <span>
-                                            <%= collection.likes_count %> <i class="fa fa-thumbs-up"
-                                                    style="font-size:24px"></i>
-                                        </span>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                            </div>
+                  <li class="list-group-item h-100">
+                    <div class="row align-items-center h-100">
+                      <div class="col-12 col-md-4 " style="height: 100px;">
+                        <img src="<%=collection.image %>" alt="<%=collection.collection_name%>" class="img-fluid h-100 w-100" style="object-fit:scale-down;">
+                      </div>
+                      <div class="col-12 col-md-8">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <h5><%= collection.collection_name %></h5>
+                          </div>
+                          <div class="text-center">
+                            <form action="/profile/<%= user.username %>/collections/<%= collection.collection_id %>" method="get">
+                              <button type="submit" class="btn btn-primary">Edit Collection</button>
+                            </form>
+                          </div>
                         </div>
-                    </li>
-                    <% }) %>
-            </ul>
+              
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="ratings d-flex">
+                            <%= collection.likes_count %> 
+                            <span class="material-icons" style="margin-left: 5px;">thumb_up_off_alt</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                <% }) %>
+              </ul>
+              
         </div>
-        <div class="button d-flex">
+        <div class="button d-flex mt-4">
+            <div class = "d-flex">
             <form action="/create/vinyls" method="get">
                 <button type="submit" class="btn btn-primary me-3">
                     Add New Vinyl
-                </button>
-            </form>
-            <form action="/create/collections" method="get">
-                <button type="submit" class="btn btn-primary me-3">
-                    Create New Collection
                 </button>
             </form>
             <form action="/profile/<%= user.username %>/vinyls" method="get">
                 <button type="submit" class="btn btn-primary me-3">
                     Manage Your Vinyls
                 </button>
+            </form>
+            </div>
+            <div>
+            <form action="/create/collections" method="get">
+                <button type="submit" class="btn btn-primary me-3">
+                    Create New Collection
+                </button>
+            </div>
             </form>
         </div>
 

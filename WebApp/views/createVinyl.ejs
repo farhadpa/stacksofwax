@@ -2,30 +2,20 @@
 <div class="container" >
     <h1>Create Vinyl</h1>
     <form action="/create/vinyl" method="POST" enctype="multipart/form-data">
-      <div class="form-group">
+      <div class="form-group mb-1">
         <label for="vinyl_name">Vinyl Name</label>
         <input type="text" class="form-control" id="vinyl_name" name="vinyl_name" required>
       </div>
-      <div class="form-group">
+      <div class="form-group ">
         <label for="vinyl_desc">Vinyl Description</label>
         <textarea class="form-control" id="vinyl_desc" name="vinyl_desc" rows="3"></textarea>
       </div>
-      <div class="form-group">
+      <div class="form-group mt-2">
         <label for="vinyl_image">Vinyl Image</label>
         <input type="file" class="form-control-file" id="image" name="image">
       </div>
-      <!-- <div class="form-group">
-        <label for="vinyl_genre">Vinyl Genre</label>
-        <select multiple class="form-control" id="vinyl_genre" name="genres[]">
-          <option value="rock">Rock</option>
-          <option value="pop">Pop</option>
-          <option value="jazz">Jazz</option>
-          <option value="blues">Blues</option>
-          <option value="hip-hop">Hip Hop</option>
-        </select>
-      </div> -->
-      <div class="form-group">
-        <label for="vinyl_genre">Vinyl Genre</label>
+      <div class="form-group mt-2">
+        <label for="vinyl_genre"><h5>Genre</h5></label>
         <% data.genres.forEach(function(genre) { %>
           <div class="form-check">
             <input type="checkbox" class="form-check-input" id="<%= genre.genre_name %>" name="genres" value="<%= genre.genre_name %>">
@@ -33,8 +23,8 @@
           </div>
         <% }); %>
       </div>
-      <div class="form-group" id="songs-container">
-        <label>Songs</label>
+      <div class="form-group mt-2" id="songs-container">
+        <label><h5>Songs</h5></label>
         <div class="song">
           <div class="form-group">
             <label for="song_name_1">Song Name</label>
@@ -51,8 +41,8 @@
         </div>
         
       </div>
-      <button type="button" class="btn btn-primary" id="add-song">Add Song</button>
-      <button type="submit" class="btn btn-primary">Create Vinyl</button>
+      <button type="button" class="btn btn-primary mt-3 mb-2" id="add-song">Add Song</button>
+      <button type="submit" class="btn btn-primary mt-3 mb-2">Create Vinyl</button>
     </form>
     <form action="/profile/<%= user.username %>" method="get">
       <input type="submit" value="Cancel/Back to Profile" class="btn btn-primary" id="backToProfile">

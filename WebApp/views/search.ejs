@@ -1,137 +1,215 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Search Results</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-<body>
+<%-include ('header.ejs'); %>
     <div class="container">
-        <h1>Search Results</h1>
-        <% if (!(collections.length === 0)) {%>
-        <h3>Collections</h3>
-        <% } %>
-        <% collections.forEach(collection => { %>
-            <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="<%= collection.image %>" class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= collection.collection_name %></h5>
-                            <p class="card-text"><%= collection.collection_desc %></p>
-                            <p class="card-text"><small class="text-muted"><%= collection.likes_count %> likes</small></p>
-                            <ul>
-                                <h4>List of vinyls belonging to this collection</h4>
-                                <% collection.vinyls.forEach(vinyl => { %>
-                                    <li>
-                                        <h6><%= vinyl.vinyl_name %></h6>
-                                        <p><%= vinyl.vinyl_desc %></p>
-                                        <img src="<%= vinyl.image %>" alt="...">
-                                        <ul>
-                                            <% vinyl.genres.forEach(genre => { %>
-                                                <li><%= genre.genre_name %></li>
+        <h1 class="mb-4 mt-3">Search Results</h1>
+        <% if (!(collections.length===0)) {%>
+            <h4>Collections</h4>
+            <% } %>
+                <% collections.forEach(collection=> { %>
+                    <div class="card mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="<%= collection.image %>" class="card-img"
+                                    alt="<%= collection.collection_name %>">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <a href="/collections/<%= collection.collection_id %>">
+                                        <h5 class="card-title">
+                                            <%= collection.collection_name %>
+                                        </h5>
+                                    </a>
+                                    <p class="card-text">
+                                        <%= collection.collection_desc %>
+                                    </p>
+                                    <p class="card-text"><small class="text-muted">
+                                            <%= collection.likes_count %> likes
+                                        </small></p>
+                                    <ul>
+                                        <h4>List of vinyls belonging to this collection</h4>
+                                        <% collection.vinyls.forEach(vinyl=> { %>
+                                            <li>
+                                                <a href="/vinyls/<%= vinyl.vinyl_id %>">
+                                                    <h6>
+                                                        <%= vinyl.vinyl_name %>
+                                                    </h6>
+                                                </a>
+                                                <p>
+                                                    <%= vinyl.vinyl_desc %>
+                                                </p>
+                                                <img src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>">
+                                                <ul>
+                                                    <% vinyl.genres.forEach(genre=> { %>
+                                                        <li>
+                                                            <%= genre.genre_name %>
+                                                        </li>
+                                                        <% }) %>
+                                                </ul>
+                                            </li>
                                             <% }) %>
-                                        </ul>
-                                    </li>
-                                <% }) %>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% }) %>
-
-        <div class="container">
-            <% if (!(vinyls.length === 0)) {%>
-                <h3>Vinyls</h3>
-                <% } %>
-            <% vinyls.forEach(vinyl => { %>
-                <div class="card mb-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="<%= vinyl.image %>" class="card-img" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= vinyl.vinyl_name %></h5>
-                                <p class="card-text"><%= vinyl.vinyl_desc %></p>
-                                
-                                <ul>
-                                    <h4>List of collections that this vinyl belongs to:</h4>
-                                    <% vinyl.collections.forEach(collection => { %>
-                                        <li>
-                                            <h6><%= collection.collection_name %></h6>
-                                            <p><%= collection.collection_desc %></p>
-                                            <p class="card-text"><small class="text-muted"><%= collection.likes_count %> likes</small></p>
-                                            <img src="<%= collection.image %>" alt="...">
-                                            <ul>
-                                                <% vinyl.genres.forEach(genre => { %>
-                                                    <li><%= genre.genre_name %></li>
-                                                <% }) %>
-                                            </ul>
-                                        </li>
-                                    <% }) %>
-                                </ul>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <% }) %>
+                    <% }) %>
 
-        <% songs.forEach(function(song) { %>
-            <div class="card mb-3">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="<%= song.vinyl.image %>" class="card-img" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= song.song_name %></h5>
-                            <p class="card-text"><%= song.song_desc %></p>
-                            <p class="card-text"><small class="text-muted"><%= song.song_artist %></small></p>
-                            <p class="card-text"><small class="text-muted">From the vinyl: <%= song.vinyl.vinyl_name %></small></p>
-                            <ul>
-                                <% song.vinyl.genres.forEach(function(genre) { %>
-                                    <li><%= genre.genre_name %></li>
-                                <% }) %>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <% }) %>
+                        <div class="container">
+                            <% if (!(vinyls.length===0)) {%>
+                                <h4>Vinyls</h4>
+                                <% } %>
+                                    <% vinyls.forEach(vinyl=> { %>
+                                        <div class="card mb-3">
+                                            <div class="row no-gutters">
+                                                <div class="col-md-4">
+                                                    <img src="<%= vinyl.image %>" class="card-img"
+                                                        alt="<%= vinyl.vinyl_name %>">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <a href="/vinyls/<%= vinyl.vinyl_id %>">
+                                                            <h5 class="card-title">
+                                                                <%= vinyl.vinyl_name %>
+                                                            </h5>
+                                                        </a>
+                                                        <p class="card-text">
+                                                            <%= vinyl.vinyl_desc %>
+                                                        </p>
+                                                        <ul>
+                                                            <% vinyl.genres.forEach(genre=> { %>
+                                                                <li>
+                                                                    <%= genre.genre_name %>
+                                                                </li>
+                                                                <% }) %>
+                                                        </ul>
+                                                        <ul>
+                                                            <h5>List of collections that this vinyl belongs to:</h5>
+                                                            <% vinyl.collections.forEach(collection=> { %>
+                                                                <li>
+                                                                    <a href="/collections/<%= collection.collection_id %>">
+                                                                        <h6>
+                                                                            <%= collection.collection_name %>
+                                                                        </h6>
+                                                                    </a>
+                                                                    <p>
+                                                                        <%= collection.collection_desc %>
+                                                                    </p>
+                                                                    <p class="card-text"><small class="text-muted">
+                                                                            <%= collection.likes_count %> likes
+                                                                        </small></p>
+                                                                    <img src="<%= collection.image %>"
+                                                                        alt="<%= collection.collection_name %>">
 
-        <div class="container">
-            <% genres.forEach(genre => { %>
-                <div class="card mb-3">
-                    <div class="row no-gutters">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= genre.genre_name %></h5>
-                                <ul>
-                                    <% genre.vinyls.forEach(vinyl => { %>
-                                        <li>
-                                            <h6><%= vinyl.vinyl_name %></h6>
-                                            <p><%= vinyl.vinyl_desc %></p>
-                                            <img src="<%= vinyl.image %>" alt="...">
-                                            <ul>
-                                                <% vinyl.collections.forEach(collection => { %>
-                                                    <li><%= collection.collection_name %></li>
-                                                <% }) %>
-                                            </ul>
-                                        </li>
-                                    <% }) %>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <% }) %>
-    </div>
+                                                                </li>
+                                                                <% }) %>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }) %>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
-</html>
+                                            <% if (!(songs.length===0)) {%>
+                                                <h4>Songs</h4>
+                                                <% } %>
+                                                    <% songs.forEach((song)=> { %>
+                                                        <div class="card mb-3">
+                                                            <div class="row no-gutters">
+                                                                <div class="col-md-4">
+                                                                    <img src="<%= song.vinyl.image %>" class="card-img"
+                                                                        alt="song.vinyl.vinyl_name">
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">
+                                                                            <%= song.song_name %>
+                                                                        </h5>
+                                                                        <p class="card-text">
+                                                                            <%= song.song_desc %>
+                                                                        </p>
+                                                                        <p class="card-text"><small class="text-muted">
+                                                                                <%= song.song_artist %>
+                                                                            </small></p>
+                                                                        <a href="/vinyls/<%= song.vinyl.vinyl_id %>">
+                                                                            <p class="card-text"><small
+                                                                                    class="text-muted">From the
+                                                                                    vinyl: <%= song.vinyl.vinyl_name %>
+                                                                                        </small></p>
+                                                                        </a>
+                                                                        <ul>
+                                                                            <% song.vinyl.genres.forEach(function(genre)
+                                                                                { %>
+                                                                                <li>
+                                                                                    <%= genre.genre_name %>
+                                                                                </li>
+                                                                                <% }) %>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <% }) %>
+
+                                                            <% if (!(genres.length===0)) {%>
+                                                                <h4>Genre</h4>
+                                                                <% } %>
+                                                                    <div class="container d-flex row">
+                                                                        <% genres.forEach(genre=> { %>
+                                                                            <div class="mb-4">
+                                                                                <div class="row no-gutters">
+                                                                                    <div class="col-md-4 me-3">
+                                                                                            <h5 class="card-title">
+                                                                                                <%= genre.genre_name %>
+                                                                                            </h5>
+                                                                                             <ul class="list-unstyled">
+                                                                                                <%
+                                                                                                    genre.vinyls.forEach(vinyl=>
+                                                                                                    { %>
+                                                                                                    <div class="card d-flex p-2 mb-3">
+                                                                                                     <li>
+                                                                                                        <a
+                                                                                                            href="vinyls/<%= vinyl.vinyl_id %>">
+                                                                                                            <h6 class="mt-2">
+                                                                                                                <%= vinyl.vinyl_name
+                                                                                                                    %>
+                                                                                                            </h6>
+                                                                                                        </a>
+                                                                                                        <p>
+                                                                                                            <%= vinyl.vinyl_desc
+                                                                                                                %>
+                                                                                                        </p>
+                                                                                                        <img class="card-img "
+                                                                                                            src="<%= vinyl.image %>"
+                                                                                                            alt="<%= vinyl.vinyl_name %>">
+                                                                                                        <ul>
+                                                                                                            <span
+                                                                                                                    class="card-text"><small>From
+                                                                                                                        collection:</small>
+                                                                                                            </span>
+                                                                                                            <div class="mb-3">
+                                                                                                             <%
+                                                                                                                vinyl.collections.forEach(collection=>
+                                                                                                                { %>
+                                                                                                                <li>
+                                                                                                                    <a
+                                                                                                                        href="collections/<%= collection.collection_id %>">
+                                                                                                                        <%= collection.collection_name
+                                                                                                                            %>
+                                                                                                                    </a>
+                                                                                                                </li>
+                                                                                                                <% }) %>    
+                                                                                                            </div>
+                                                                                                       
+                                                                                                        </ul>
+                                                                                                    </li>    
+                                                                                                    </div>
+                                                                                                    <% }) %>
+                                                                                            </ul>
+                                                                                           
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <% }) %>
+                                                                    </div>
+
+                                                                    <%- include ('footer.ejs'); %>

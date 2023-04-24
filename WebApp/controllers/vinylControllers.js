@@ -13,14 +13,12 @@ const getCreateVinyl = async (req, res) => {
     const endpoint = `http://localhost:4000/genres`;
     const response = await axios.get(endpoint, { withCredentials: true });
     const data = response.data;
-    console.log(data);
     res.render('createVinyl', { data });
 };
 
 const createVinyl = async (req, res) => {
     req.body.image = '/uploads/' + req.file.filename;
     req.body.user_id = req.session.user.user_id;
-    console.log(req.body);
     const endpoint = `http://localhost:4000/create/vinyls`;
     const response = await axios.post(endpoint, req.body, { withCredentials: true });
     res.redirect(`/users/${req.session.user.username}`);

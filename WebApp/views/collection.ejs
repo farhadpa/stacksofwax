@@ -1,38 +1,29 @@
 <%- include ( 'header.ejs' ); %>
 
   <main class="container mt-5">
-    <div class="row mb-5">
-      <div class="col-md-6">
-        <h2>
+    <div class="row">
+      <div class="col-md-6 ">
+        <h2 class="mb-4">
           <%= data.collection.collection_name %>
         </h2>
+        <div class="col-md-6 mb-3">
+          <img  src="<%= data.collection.image %>" alt=<%=data.collection.collection_name%>>
+        </div>
       </div>
       <div class="col-md-6 text-md-end">
         <a href="/collections/<%= data.collection.collection_id %>/reviews" class="btn btn-primary me-3">
           Reviews
         </a>
-        <% if (isAuthenticated && !(user.username === data.collection.users.username)) {%>
-        <form action="/collections/<%= data.collection.collection_id %>/like/<%= user.user_id %>" method="post">
-        <button type="submit" class="btn btn-primary me-3" >
-          Like this collection
-        </button>
-        </form>
-        <% } %>
-        <!-- <form action="/collections/<%= data.collection.collection_id %>?_method=DELETE" method="POST">
-          <button class="btn btn-danger">
-            Delete
-          </button>
-        </form> -->
+        <% if (isAuthenticated && !(user.username===data.collection.users.username)) {%>
+          <form action="/collections/<%= data.collection.collection_id %>/like/<%= user.user_id %>" method="post">
+            <button type="submit" class="btn btn-primary me-3 mt-3">
+              Like this collection
+            </button>
+          </form>
+          <% } %>
       </div>
     </div>
-
-    <div class="row mb-5">
-      <div class="col-md-4">
-        <img src="<%= data.collection.image %>" alt=<%=data.collection.collection_name%>>
-      </div>
-    </div>
-
-    <div class="row mb-5">
+    <div class="row mb-2">
       <div class="col-md-4">
         <a href="/users/<%= data.collection.users.username %>">
           <%= data.collection.users.first_name %>
@@ -40,32 +31,33 @@
         </a>
       </div>
     </div>
-    <div class="ratings">
-      <span>
-        <%= data.collection.likes_count %> <i class="fa fa-thumbs-up" style="font-size:24px"></i>
-      </span>
-      <i class="fas fa-star"></i>
+    <div class="ratings d-flex mb-5">
+      <%= data.collection.likes_count %>
+        <span class="material-icons " style="margin-left: 5px;">
+          thumb_up_off_alt
+        </span>
     </div>
-
-
-    <ul class="row collection-list">
+    <ul class="row collection-list list-unstyled me-4">
       <% data.collection.vinyls.forEach(vinyl=> { %>
-        <li class="col-md-4">
-          <a href="/vinyls/<%= vinyl.vinyl_id %>">
+        <li class="col-md-4 mt-4">
             <div class="card">
               <img src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>" class="card-img-top">
-              <div class="card-body">
+              <div class="card-body d-flex justify-content-between">
+                <div>
                 <h5 class="card-title">
+                  <a href="/vinyls/<%= vinyl.vinyl_id %>" class="card-text">
                   <%= vinyl.vinyl_name %>
+                  </a>
                 </h5>
-                <% vinyl.genres.forEach(genre=> { %>
-                  <p class="card-text">
+                <p>
+                  <% vinyl.genres.forEach(genre=> { %>
                     <%= genre.genre_name %>
-                  </p>
-                  <% }) %>
+                      <% }) %>
+                </p>
+                </div>
+
               </div>
             </div>
-          </a>
         </li>
         <% }) %>
     </ul>

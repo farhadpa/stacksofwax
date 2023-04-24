@@ -18,10 +18,10 @@
             <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Collection</button>
+        <button type="submit" class="btn btn-primary mt-3 mb-2">Create Collection</button>
     </form>
     <form action="/profile/<%= user.username %>" method="get">
-        <input type="submit" value="Cancel/Back to Profile" class="btn btn-primary" id="backToProfile">
-      </form>
+        <input type="submit" value="Cancel/Back to Profile" class="btn btn-primary  mb-3" id="backToProfile">
+    </form>
 </main>
     <%- include('footer.ejs'); %>

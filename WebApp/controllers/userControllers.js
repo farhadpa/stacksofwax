@@ -4,7 +4,11 @@ const getUserCollections = async (req, res) => {
     try {
         let response = await axios.get(`http://localhost:4000/users/${req.params.username}`, {withCredentials: true});
         let data = response.data;
+        if (data.user === null ) {
+            res.status(404).send('User not found');
+        } else {
         res.render('user', {data: data});
+        }
     } catch (error) {
         console.log(error.message);
     }
@@ -14,6 +18,9 @@ const getUserProfile = async (req, res) => {
     try {
         let response = await axios.get(`http://localhost:4000/users/${req.params.username}`, {withCredentials: true});
         let data = response.data;
+        if (data.user.username === null ) {
+            res.status(404).send('User not found');
+        }
         res.render('profile', {data: data});
     } catch (error) {
         console.log(error.message);

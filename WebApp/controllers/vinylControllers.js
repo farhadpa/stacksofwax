@@ -6,7 +6,11 @@ const getVinylById = async (req, res) => {
     const endpoint = `http://localhost:4000/vinyls/${id}`;
     const response = await axios.get(endpoint, { withCredentials: true });
     const data = response.data;
+    if (data.vinyl === null) {
+        res.status(404).send('Vinyl not found');
+    } else {
     res.render('vinyl', { data });
+    }
 };
 
 const getCreateVinyl = async (req, res) => {
@@ -21,7 +25,7 @@ const createVinyl = async (req, res) => {
     req.body.user_id = req.session.user.user_id;
     const endpoint = `http://localhost:4000/create/vinyls`;
     const response = await axios.post(endpoint, req.body, { withCredentials: true });
-    res.redirect(`/users/${req.session.user.username}`);
+    res.redirect(`/profile/${req.session.user.username}`);
     // res.render('createVinyl');
 
 };

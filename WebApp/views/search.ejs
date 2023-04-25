@@ -36,7 +36,9 @@
                                                 <p>
                                                     <%= vinyl.vinyl_desc %>
                                                 </p>
-                                                <img src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>">
+                                                <div class="col-md-4">
+                                                <img  class="card-img" src="<%= vinyl.image %>" alt="<%= vinyl.vinyl_name %>">
+                                                </div>
                                                 <ul>
                                                     <% vinyl.genres.forEach(genre=> { %>
                                                         <li>

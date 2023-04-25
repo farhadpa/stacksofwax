@@ -6,7 +6,7 @@ const { createUser, getUserByUserName } = require("../services/authServices");
 const register = async (req, res) => {
     // validate user input.
     const { error } = validateUser(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
+    if (error) return res.json({ message: error.details[0].message });
 
     let { username, password, first_name, last_name, email } = req.body;
     // check if the username already exists.
@@ -17,7 +17,7 @@ const register = async (req, res) => {
     } else {
         // create a new user.
         const newUser = await createUser(username, password, first_name, last_name, email);
-        res.json({ message: "success" , username: newUser.username + " has been created." });
+        res.json({ message: "successfully registered." });
     };
 };
 

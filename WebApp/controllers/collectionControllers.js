@@ -17,7 +17,11 @@ const getCollectionById = async (req, res) => {
     try {
         let response = await axios.get(endpoint, {withCredentials: true});
         let data = response.data;
+        if (data.collection === null) {
+            res.status(404).send('Collection not found');
+        } else {
         res.render('collection', {data: data});
+        }
     } catch (error) {
         console.log(error.message);
     }
@@ -44,7 +48,7 @@ const createCollection = async (req, res) => {
     req.body.user_id = req.session.user.user_id;
     try {
         let response = await axios.post('http://localhost:4000/create/collections', req.body, {withCredentials: true});
-        res.redirect(`/users/${req.session.user.username}`);
+        res.redirect(`/profile/${req.session.user.username}`);
     } catch (error) {
         console.log(error.message);
     }

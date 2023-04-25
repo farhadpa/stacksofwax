@@ -39,6 +39,8 @@ Vinyl.associate = (models) => {
     });
     Vinyl.hasMany(models.Song, {
         foreignKey: 'vinyl_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         // as: 'songs',
     });
     Vinyl.belongsTo(models.User, {

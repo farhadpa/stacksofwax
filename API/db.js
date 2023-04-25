@@ -16,6 +16,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
         timestamps: false,
         freezeTableName: true
     },
+    logging: false
 });
 
 sequelize.authenticate()

@@ -17,9 +17,11 @@
                   <h3><%= collection.collection_name %></h3>
                 </a>
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="ratings">
-                    <span> <%= collection.likes_count %> <i class="fa fa-thumbs-up" style="font-size:24px"></i></span>
-                    <i class="fas fa-star"></i>
+                  <div class="ratings d-flex">
+                    <%= collection.likes_count %> 
+                    <span class="material-icons " style="margin-left: 5px;">
+                     thumb_up_off_alt
+                     </span>
                   </div>
                 </div>
               </div>

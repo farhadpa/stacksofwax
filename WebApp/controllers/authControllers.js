@@ -35,7 +35,7 @@ const signOut = async (req, res) => {
 
 const getRegister = async (req, res) => {
     try {
-        res.render('register');
+        res.render('register', {error: ''});
     } catch (error) {
         console.log(error.message);
     }
@@ -45,7 +45,11 @@ const register = async (req, res) => {
     try {
         let endpoint = 'http://localhost:4000/users/register';
         let response = await axios.post(endpoint, req.body, {withCredentials: true});
-        res.redirect('/collections');
+        if (response.data.message === 'successfully registered.') {
+            res.redirect('/login');
+        } else {
+            res.render('register', {error: response.data.message});
+        }
     } catch (error) {
         console.log(error.message);
     }

@@ -10,7 +10,7 @@ const searchControllers = require('../controllers/searchControllers');
 const auth = require("../middleware/auth");
 const upload = require("../middleware/upload");
 
-
+routes.get('/', collectionControllers.getCollections);
 routes.get('/home', collectionControllers.getCollections);
 
 // search routes
@@ -57,6 +57,11 @@ routes.post('/create/vinyl', [auth, upload] , vinylControllers.createVinyl);
 routes.post('/remove/vinyl/:collection_id/:vinyl_id', auth, vinylControllers.removeVinylFromCollection);
 // to add vinyl to collection
 routes.post('/add/vinyl/:collection_id/:vinyl_id', auth, vinylControllers.addVinylToCollection);
+
+// all other routes
+routes.get('*', (req, res) => {
+    res.render('404');
+});
 
 
 module.exports = routes;

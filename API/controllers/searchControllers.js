@@ -2,7 +2,6 @@ const {searchService} = require('../services/searchServices');
 
 const search = async (req, res) => {
     const {query} = req.query;
-    console.log(query);
     try {
         const results = await searchService(query);
         res.status(200).json(results);

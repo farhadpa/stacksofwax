@@ -5,7 +5,6 @@ const getCollections = async (req, res) => {
         let response = await axios.get('http://localhost:4000/collections', {withCredentials: true});
         let data = response.data;
         res.render('index', {data: data});
-    // res.send(data);
     } catch (error) {
         console.log(error.message);
     } 

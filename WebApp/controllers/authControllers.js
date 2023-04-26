@@ -15,7 +15,7 @@ const signIn = async (req, res) => {
         if (response.data.message === 'successfully logged in.') {
             req.session.user = response.data.user;
             req.session.auth = true;
-            res.redirect('/users/' + req.session.user.username);
+            res.redirect('/profile/' + req.session.user.username);
         } else {
             res.render('login', {error: response.data.message});
         }

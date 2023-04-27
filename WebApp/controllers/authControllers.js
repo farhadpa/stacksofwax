@@ -10,7 +10,7 @@ const getSingIn = async (req, res) => {
 
 const signIn = async (req, res) => {
     try {
-        let endpoint = 'http://localhost:4000/users/login';
+        let endpoint = `http://${process.env.ENDPOINT_ADDRESS}/users/login`;
         let response = await axios.post(endpoint, req.body, {withCredentials: true});
         if (response.data.message === 'successfully logged in.') {
             req.session.user = response.data.user;
@@ -43,7 +43,7 @@ const getRegister = async (req, res) => {
 
 const register = async (req, res) => {
     try {
-        let endpoint = 'http://localhost:4000/users/register';
+        let endpoint = `http://${process.env.ENDPOINT_ADDRESS}/users/register`;
         let response = await axios.post(endpoint, req.body, {withCredentials: true});
         if (response.data.message === 'successfully registered.') {
             res.redirect('/login');

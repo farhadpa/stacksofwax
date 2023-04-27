@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const getCollections = async (req, res) => {
     try {
-        let response = await axios.get('http://localhost:4000/collections', {withCredentials: true});
+        let response = await axios.get(`http://${process.env.ENDPOINT_ADDRESS}/collections`, {withCredentials: true});
         let data = response.data;
         res.render('index', {data: data});
     } catch (error) {
@@ -12,7 +12,7 @@ const getCollections = async (req, res) => {
 
 const getCollectionById = async (req, res) => {
     let id = req.params.id;
-    let endpoint = `http://localhost:4000/collections/${id}`;
+    let endpoint = `http://${process.env.ENDPOINT_ADDRESS}/collections/${id}`;
     try {
         let response = await axios.get(endpoint, {withCredentials: true});
         let data = response.data;
@@ -29,7 +29,7 @@ const getCollectionById = async (req, res) => {
 const likeCollection = async (req, res) => {
     let id = req.params.collection_id;
     let user_id = req.session.user.user_id;
-    let endpoint = `http://localhost:4000/collections/${id}/like/${user_id}`;
+    let endpoint = `http://${process.env.ENDPOINT_ADDRESS}/collections/${id}/like/${user_id}`;
     try {
         let response = await axios.post(endpoint, {withCredentials: true});
         res.redirect(`/collections/${id}`);
@@ -46,7 +46,7 @@ const createCollection = async (req, res) => {
     req.body.image = '/uploads/' + req.file.filename;
     req.body.user_id = req.session.user.user_id;
     try {
-        let response = await axios.post('http://localhost:4000/create/collections', req.body, {withCredentials: true});
+        let response = await axios.post(`http://${process.env.ENDPOINT_ADDRESS}/create/collections`, req.body, {withCredentials: true});
         res.redirect(`/profile/${req.session.user.username}`);
     } catch (error) {
         console.log(error.message);

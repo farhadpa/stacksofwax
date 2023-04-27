@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const getReviewsByCollectionId = async (req, res) => {
     try {
-        let endpoint = `http://localhost:4000/collections/${req.params.id}/reviews`;
+        let endpoint = `http://${process.env.ENDPOINT_ADDRESS}/collections/${req.params.id}/reviews`;
         let response = await axios.get(endpoint, {withCredentials: true});
         res.render('reviews', {data: response.data});
     } catch (error) {
@@ -14,7 +14,7 @@ const addReviewToCollection = async (req, res) => {
     req.body.user_id = req.session.user.user_id;
     req.body.collection_id = req.params.id;
     try {
-        let endpoint = `http://localhost:4000/create/review`;
+        let endpoint = `http://${process.env.ENDPOINT_ADDRESS}/create/review`;
         let response = await axios.post(endpoint, req.body, {withCredentials: true});
         res.redirect(`/collections/${req.params.id}/reviews`);
     } catch (error) {

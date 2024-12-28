@@ -6,7 +6,7 @@ Instructions to run the system:
 2. Create a new database using your local phpMyAdmin and name it stacksofwax  
 3. Make sure that the new database, that you created now, is selected.  
 4. Select the import tab.
-5. Press choose file button and select the 40387376.sql file.  
+5. Press choose file button and select the sql file.  
 6. Press Go. The database should be populated with 9 tables.  
 - ### API:  
 7. Open the API folder in Visual studio code.  
